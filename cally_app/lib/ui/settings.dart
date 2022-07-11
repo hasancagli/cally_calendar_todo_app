@@ -18,6 +18,23 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+
+	var email = "Your email.";
+  void getEmail() {
+    if (FirebaseAuth.instance.currentUser != null) {
+      setState(() {
+        email = FirebaseAuth.instance.currentUser!.email.toString();
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    getEmail();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +71,7 @@ class _SettingsState extends State<Settings> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'usercalendar@gmail.com',
+                  email,
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColors.grey,
